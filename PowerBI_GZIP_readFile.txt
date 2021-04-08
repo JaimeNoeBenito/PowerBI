@@ -1,0 +1,8 @@
+let
+    Source = AzureStorage.DataLake("https://DLK_ADRSS_AND_PATH"),
+    DLK = Source{[#"Folder Path"="https://DLK_ADRSS_AND_PATH",Name="filename.csv.gz"]}[Content],
+    Decompressed = Binary.Decompress(DLK, Compression.GZip),
+    #"Imported CSV" = Csv.Document(Decompressed,[Delimiter="|", Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Promoted Headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars=true])
+in
+    #"Promoted Headers"
