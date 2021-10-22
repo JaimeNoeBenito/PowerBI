@@ -1,0 +1,10 @@
+Sum_your_value = 
+var SelectedDate=MAX('Date'[Date])
+Return CALCULATE(
+	SUM('YOUR_TABLE'[your_price]),
+	('YOUR_TABLE'[field_valid_values] IN {
+		"value_1",
+		"value_2",
+		"value_3"
+	})&& (SelectedDate> YOUR_TABLE[DATE_1] && (SelectedDate < YOUR_TABLE[DATE_2] || ISBLANK(YOUR_TABLE[DATE_1] )))
+)
